@@ -11,18 +11,16 @@ jobs:
   runs-on: ubuntu-latest
   
    steps:
- 
-    - uses: actions/checkout@v2
-    - name: docker login
-      env:
+     - uses: actions/checkout@v2
+     - name: docker login
+       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $DOCKER_USER/node-test:${{ steps.date.outputs.date }}
+         run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+     - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag $DOCKER_USER/node-test:${{ steps.date.outputs.date }}
      
-      
-    - name: Docker Push
-      run: docker push andr35/node-test:${{steps.date.outputs.dat}}
+     - name: Docker Push
+        run: docker push andr35/node-test:${{steps.date.outputs.dat}}
 
